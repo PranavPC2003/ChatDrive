@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/compose_messageCSS.css' %}">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        defer></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js" defer></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script type="text/javascript" src="{% static 'js/main.js' %}" defer></script>
+
+</head>
+
+<body style="background-image:url('{% static 'images/loginpagebg.jpg' %}'); background-repeat; no-repeat;">
+
+    <a class="btn btn-sm btn-success back-button" href="{% url 'inbox' %}">Back</a>
+
+    {% block content %}
+    <div class="wrapper">
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                {{ message }}
+                <button class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </li>
+                {% endfor %}
+
+                {% if form.errors %}
+                <ul class="errorlist">
+                    {% for field in form %}
+                    {% for error in field.errors %}
+                    <li>{{ field.label }}: {{ error }}</li>
+                    {% endfor %}
+                    {% endfor %}
+                </ul>
+                {% endif %}
+        </ul>
+        <form action="{% url 'compose_message' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <h2>Compose Message</h2>
+            <div class="input-box">
+                <label for="receiver"
+                    style="display: inline-block; width:80px; font-size:20px; color: white;">Receiver:</label>
+                <select name="receiver" required
+                    style="width: calc(104.5% - 110px); display: inline-block; background-color: transparent; color: white; border: 2px blur(5%) white; outline: none; font-size: 17px; backdrop-filter: blur(10px); padding:6px; border-radius:50px">
+                    <option value="" disabled selected style="color: white;">Select a user</option>
+                    {% for user in users %}
+                    <option value="{{ user.username }}" style="color: black;">{{ user.first_name }} ({{ user.username }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="input-box">
+                <label for="subject" style="display: inline-block; width:70px; font-size:20px">Subject:</label>
+                <input type="text" name="subject" required style="width: calc(106.5% - 110px); display: inline-block;">
+            </div>
+
+            <div class="input-box">
+                <label for="message" style="font-size:18px; margin: 5px auto">Message:</label><br>
+                <textarea name="message" rows="3" style="width: 100%; background-color: transparent; backdrop-filter: blur(10px); border-radius:7px; color:white
+                    ; margin-top: 3px" required></textarea><br>
+            </div>
+
+            <label for="attached_file">Attach File:</label>
+            <input type="file" id="myFile" name="attached_file"
+                accept=".pdf, .doc, .docx, .jpg, .jpeg, .png, .xlsx, .xls" enctype="multipart/form-data" required>
+
+            <div class="form-group">
+                <button style="background-color:#6416AA; color: white" type="submit"
+                    class="btn btn-success btn-lg btn-block" href="">Send</button>
+            </div>
+        </form>
+    </div>
+    {% endblock %}
+
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+
+</body>
+
+</html>

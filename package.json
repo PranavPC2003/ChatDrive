@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "autoprefixer": "^10.4.15",
+    "jquery": "^3.7.0",
+    "postcss": "^8.4.28",
+    "postcss-cli": "^10.1.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.3"
+  }
+}

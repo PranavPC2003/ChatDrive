@@ -1,0 +1,288 @@
+.navbar {
+    background-color: #09206b;
+    border-radius: 30px;
+    margin-right: 10px;
+    margin-left: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    position: fixed;
+    /* Set the position to fixed */
+    top: 8px;
+    /* Add a bit of top margin */
+    left: 3px;
+    right: 3px;
+    z-index: 1000;
+    /* Ensure the navigation bar is on top of other elements */
+    border: 2px solid rgba(255,255,255,.2) ;
+    box-shadow: 0 0 10px rgba(0,0,0,.2);
+    /* Add a subtle shadow */
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.user-icon {
+    display: flex;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+}
+
+.user-dropdown {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.user-dropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.user-dropdown li {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.user-dropdown li:hover {
+    background-color: #f1f1f1;
+}
+
+.company-icon {
+    width: 52px;
+    /* Adjust the width as needed */
+    height: 50px;
+    /* Adjust the height as needed */
+    margin-right: 13px;
+    /* Add some spacing between the icon and the text */
+    margin-top: -6px;
+    margin-left: 15px;
+}
+
+.navbar li a {
+    padding: 3px 2px;
+    text-decoration: none;
+    color: white;
+}
+
+.sidebar {
+    width: 210px;
+    height: 100%;
+    background-color: #f0f0f0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    background: transparent;   
+    border: 2px solid rgba(255,255,255,.2) ;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0,0,0,.2);
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 90px;
+}
+
+.sidebar li {
+    padding: 17px 35px;
+}
+
+.sidebar a {
+    text-decoration: none;
+    display: block;
+    color: white;
+    padding: 10px 20px; /* Adding padding for better spacing */
+    transition: background-color 0.3s ease; /* Adding transition effect for hover */
+    border-radius: 10px;
+}
+
+.sidebar a:hover {
+    background-color: #071952; /* Change background color on hover */
+    color: white; /* Change text color on hover */
+}
+
+.upload-section {
+    margin-top: 20px;
+}
+
+#uploadButton {
+    background-color: #071952;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 75px;
+    margin-left: 10px;
+}
+
+#uploadButton:hover {
+    background-color: #0c2c71;
+}
+
+#fileList {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-right: 30px;
+}
+
+#fileList li {
+    margin-bottom: 10px;
+    padding: 5px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    width: 100%;
+    min-height: 100vh;
+    background: #6416AA;
+    background: linear-gradiant(282deg, #6416AA 0%, #6416AA);
+}
+
+.box {
+    max-width: 500px;
+    background: white;
+    padding: 30px;
+    width: 100%;
+    border-radius: 5px;
+    margin-left: 250px;
+    margin-top: 10px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.upload-area-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.uploadlabel {
+    width: 100%;
+    min-height: 100px;
+    background: #18a7ff0d;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 3px dashed #6416AA;
+    cursor: pointer;
+}
+
+.uploadlabel span {
+    font-size: 70px;
+    color: #6416AA;
+}
+
+.uploadlabel p {
+    color: #6416AA;
+    font-size: 20px;
+    font-weight: 800;
+    font-family: cursive;
+}
+
+.uploaded {
+    margin: 30px 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: #6416AA;
+}
+
+.showfilebox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+    padding: 10px 15px;
+    box-shadow: black 0px 0px 0px 1px,
+        #d1d5db3d 0px 0px 0px 1px inset;
+}
+
+.showfilebox .left {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.filetype {
+    background: #6416AA;
+    color: white;
+    padding: 5px 10px;
+    font-size: 15px;
+    text-transform: capitalize;
+    font-weight: 700;
+}
+
+.left h3 {
+    font-weight: 600;
+    font-size: 15px;
+    color: black;
+    margin: 0;
+}
+
+
+.right span {
+    background: #6416AA;
+    color: white;
+    width: 25px;
+    height: 25px;
+    font-size: 25px;
+    line-height: 25px;
+    display: inline-block;
+    text-align: center;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.download-link {
+    text-decoration: none;
+    margin-right: 10px;
+    background: #6416AA;
+    color: white;
+    width: 25px;
+    height: 25px;
+    font-size: 25px;
+    line-height: 25px;
+    display: inline-block;
+    text-align: center;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+main {
+    margin-left: 250px;
+    /* Adjust this value to match the sidebar width */
+    padding: 20px;
+}

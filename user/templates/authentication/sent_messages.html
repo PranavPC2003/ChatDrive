@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js" defer></script>
+
+    <script type="text/javascript" src="{% static 'js/jquery.dataTables.js' %}" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ChatDrive</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+    <style>
+        .navbar {
+            background-color: #071952;
+            border-radius: 30px;
+        }
+
+        .navbar ul {
+            overflow: auto;
+        }
+
+        .navbar li {
+            float: left;
+            list-style: none;
+            margin: 3px 20px
+        }
+
+        .navbar li a {
+            padding: 3px 3px;
+            text-decoration: none;
+            color: white;
+        }
+    </style>
+
+</head>
+<script>
+    $(document).ready(function () {
+        $('#dataTable').DataTable();
+
+        var myModal = new bootstrap.Modal(document.getElementById('myModal'));
+    });
+</script>
+
+<body style="background-image:url('{% static 'images/loginpagebg.jpg' %}'); background-repeat; no-repeat;">
+    <header>
+        <nav class="navbar">
+            <div class="navbar-left">
+                <img src="{% static 'images/Chat_DRIVE_without_name-removebg-preview.png'%}" alt="Company Icon"
+                    class="company-icon">
+                <a class="navbar-logo" href="{% url 'index' %}">ChatDrive</a>
+            </div>
+            <div class="navbar-right">
+                <div class="user-icon">
+                    {% if user.is_authenticated %}
+                    <i class='bx bxs-user' style="color:white"></i>
+                    <li style="color: white; margin-left:8px">{{ user.first_name }}</li>
+                    {% else %}
+                    <span class="username">User</span>
+                    {% endif %}
+
+                    {% if user.is_authenticated %}
+                    <li style="margin-left: 4px"><a href="/signin">Logout</a></li>
+                    {% else %}
+                    <li><a href="/signin">Login</a></li>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="sidebar">
+        <ul>
+            <li><a href="/index">Home</a></li>
+            <li><a href="/myupload">Upload</a></li>
+            <li><a href="/inbox">Inbox</a></li>
+            <li><a href="/sent">Sent</a></li>
+            <li><a href="#">Chat</a></li>
+        </ul>
+    </div>
+
+    <div class="col-md-10 col-sm-4 col-xs-4" style="padding-left: 180px; padding-top: 5px">
+        <div id="content" class="p-8 p-md-5 pt-5">
+            <div class="col-md-12 col-sm-12 col-xs-10">
+                <div id="content-wrapper">
+                    <div class="container-fluid">
+                        <ol class="breadcrumb">
+                            <h1
+                                style="font-size: 25px; color: white; font-weight: bold; background: transparent; backdrop-filter: blur(20px);">
+                                Sent</h1>
+                        </ol>
+                        <div class="card mb-3">
+                            <div class="table-responsive">
+                                <div class="card-body">
+                                    {% for message in messages %}
+                                    <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                                        {{ message }}
+                                    </div>
+                                    {% endfor %}
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Sent to:</th>
+                                                <th>Subject</th>
+                                                <th>Date and Time</th>
+                                                <th>View</th>
+                                            </tr>
+                                        </thead>
+                                        {% block content %}
+                                        <tbody>
+                                            {% for message in sent_messages %}
+                                            <tr>
+                                                <td>{{ message.receiver.first_name }} ({{ message.receiver.username }})
+                                                </td>
+                                                <td>{{ message.subject }}</td>
+                                                <td>{{ message.timestamp|date:"F d, Y - h:i A" }}</td>
+                                                <td><a href="{% url 'view_sent_message' message.id %}" style="color:blue">view message</a>
+                                                    <a href="{% url 'delete_message' message.id %}"
+                                                        style="margin-right: -4px; margin-left: 17px; background:red;color:white; padding:5px; border-radius:5px;">Delete</a>
+                                                </td>
+                                            </tr>
+                                            {% empty %}
+                                            <tr>
+                                                <td colspan="4">No sent messages.</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                        {% endblock %}
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
